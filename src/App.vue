@@ -2,10 +2,12 @@
   <v-grid 
     ref="grid"
     theme="material"
-    @click="handleClick($event)" 
     @keydown="handlePress($event)"
     @beforecellfocus="focus($event)"
     :source="rows" 
+    :editors="{
+      id: button,
+    }"
     :columns="columns"
     :resize="true"
   />
@@ -13,36 +15,48 @@
 
 <script setup>
 import VGrid from "@revolist/vue3-datagrid";
+import { VGridVueEditor, } from "@revolist/vue3-datagrid";
+import Editor from './TextareaEditor.vue';
 import { ref } from 'vue';
-const grid = ref()
+const grid = ref(null);
+const button= VGridVueEditor(Editor);
 
 const columns = [
   {
     name: 'Id',
     prop: 'id',
+    editor: 'id',
     cellTemplate: (createElement, props) => {
-      console.log("apppppppppppp")
-      return createElement('div', {
-        style: {
-          color: 'black'
+
+          const str = props.model[props.prop];
+          const regex = /(https?:\/\/[^\s()（）]+)/g;
+          const parts = str.split(regex);
+
+          return createElement('dev', {}, parts.map(part => {
+              if (regex.test(part)) {
+                  return createElement('span', {
+                      style: {
+                          color: 'blue',
+                          textDecoration: 'underline'
+                      },
+                      onclick: (event) => {
+                          if (event.metaKey) {
+                          window.location.href = event.target.innerText
+                          }
+                        }
+                      
+                  }, part);
+              } else {
+                  return createElement('span', {}, part);
+              }
+          }));
         },
-        repeat: true,
-        onkeydown: (event) => {
-          console.log("awefa")
-          console.log(event)
-          if (event.metaKey === true && event.code === 'Enter') {
-            event.preventDefault();
-          }
-        },
-        contenteditable: true,
-      }, props.model[props.prop]);
-    },
   },
   {
     name: 'badge',
     prop: 'badge',
     cellTemplate: (createElement, props) => {
-      return createElement('span', {
+      return  ('span', {
         style: {
           color: 'white',
           backgroundColor: props.model[props.prop],
@@ -77,6 +91,7 @@ const columns = [
   },
 ];
 
+
 const rows = ref([
   {
     id: "1",
@@ -90,12 +105,7 @@ const rows = ref([
   },
 ]);
 
-function handleClick(event) {
-  const str = event.target.innerText;
-  if (event.metaKey && (str.includes('https://') || str.includes('http://'))) {
-    window.open(str)
-  }
-}
+
 
 function handlePress(event) {
   if (event.metaKey === true && event.code === 'Enter') {
@@ -127,5 +137,10 @@ revo-grid {
 
 input {
   white-space: pre-wrap;
+}
+
+* {
+  white-space: pre-wrap;
+  word-wrap: break-word;
 }
 </style>

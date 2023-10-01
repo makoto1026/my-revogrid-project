@@ -1147,6 +1147,14 @@
   dependencies:
     lodash "^4.17.20"
 
+"@revolist/revogrid@^4.6.0-next.12":
+  version "4.6.0-next.12"
+  resolved "https://registry.yarnpkg.com/@revolist/revogrid/-/revogrid-4.6.0-next.12.tgz#e4312abd6b65437c53eb59b0593099a6cf9afb81"
+  integrity sha512-17dxu0zPk5f3TanoVjATeVBQKZd3Ucqsq0zt/vptVEIvkyuOYr/BeJuuO2OWte2xm4PiBYfRRjyYJdjwOqNpyQ==
+  dependencies:
+    "@stencil/core" "^4.0.5"
+    lodash "^4.17.21"
+
 "@revolist/vue3-datagrid@^3.6.17":
   version "3.6.17"
   resolved "https://registry.yarnpkg.com/@revolist/vue3-datagrid/-/vue3-datagrid-3.6.17.tgz#57b308fad8efcc7784456469e2fa3d753f1f3124"
@@ -1191,6 +1199,11 @@
   version "2.22.3"
   resolved "https://registry.yarnpkg.com/@stencil/core/-/core-2.22.3.tgz#83987e20bba855c450f6d6780e3a20192603f13f"
   integrity sha512-kmVA0M/HojwsfkeHsifvHVIYe4l5tin7J5+DLgtl8h6WWfiMClND5K3ifCXXI2ETDNKiEk21p6jql3Fx9o2rng==
+
+"@stencil/core@^4.0.5":
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/@stencil/core/-/core-4.2.1.tgz#c60fa612f83d3380847d93d8b09097528a941576"
+  integrity sha512-alYwqVwxfD0n6HKRVJqJoTzQNnf44n/sddvjNu3JMEn3sfY/Ag7rpmwUntYjtJmRut+or+9gPPgIJviCuKi4yQ==
 
 "@trysound/sax@0.2.0":
   version "0.2.0"
